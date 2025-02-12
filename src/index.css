@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+
+.bg-home {
+    background-image: url('/bg.svg');
+    background-repeat: no-repeat;
+    background-position: right top;
+   
+  }
+.bg-home-xl {
+    background-image: url('/bg.svg');
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: right top;
+  }

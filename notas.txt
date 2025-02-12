@@ -1,0 +1,255 @@
+
+TODO: INIT FRONT DEVTREE
+
+npm create vite@latest   
+
+TODO: ONSTALAR TAILWIND NUEVA FORMA PARA VITE 
+
+https://tailwindcss.com/docs/installation/using-vite
+
+npm install tailwindcss @tailwindcss/vite
+
+import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+  ],
+}
+
+@import "tailwindcss";
+
+npm run dev
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/dist/styles.css" rel="stylesheet">
+</head>
+<body>
+  <h1 class="text-3xl font-bold underline">
+    Hello world!
+  </h1>
+</body>
+</html>
+
+TODO: ROUTER
+
+npm i react-router-dom
+
+TODO: LIMPIEZA 
+
+BORRAMOS ASSETS 
+
+BORRAMOS APP.TSX
+
+TODO: ROUTER CREACION
+
+creamos el archivo de rutas y luego en main renderizamos ese router 
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoginView from "./views/LoginView";
+
+export default function Router() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route>
+          <Route path="/auth/login" element={<LoginView />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+
+TODO: MAIN 
+
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import Router from "./router";
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <Router />
+  </StrictMode>
+);
+
+
+para compartir contenido generalmente navs , headers, footer, separacion de auth componente con la app 
+
+etc etc
+
+podemos crear layouts tipo next donde declaramos en el router que sera asi 
+
+
+  <BrowserRouter>
+      <Routes>
+        <Route element={<AuthLayout />}>
+          <Route path="/auth/login" element={<LoginView />} />
+          <Route path="/auth/register" element={<RegisterView />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+
+
+    en el layout hay que llamar a outlet 
+
+    import { Outlet } from "react-router-dom";
+
+function AuthLayout() {
+  return (
+    <>
+      <div className="bg-slate-800 min-h-screen">
+        <div className="max-w-lg mx-auto pt-10 px-5">
+          <img src="/logo.svg" alt="Logotipo DevTree" />
+        </div>
+
+        <div className="py-10">
+          <Outlet />
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default AuthLayout;
+
+
+npm i react-hook-form
+
+
+hice un componente dedicado a los errores con un children 
+
+TODO: TYPES INTERFACES 
+
+VER ARCHIVOS TYPES Y COMO SE TOMAN Y SE USA EL PICK
+
+
+npm i axios
+
+
+crear funcion mientras en la accion del formulario de react hook form 
+
+
+TODO: ENV EN VITE 
+
+la manera de llamar un env en vit es 
+
+import.meta.env.VITE_BACKEND_URL
+
+TODO: TOAST SONNER 
+
+npm i sonner
+
+PONEMOS EL TOAS EN APP LAYOUT POR QUE RODEA LO QUE TENEMOS
+
+
+import { Outlet } from "react-router-dom";
+import { Toaster } from "sonner";
+
+function AuthLayout() {
+  return (
+    <>
+      <div className="bg-slate-800 min-h-screen">
+        <div className="max-w-lg mx-auto pt-10 px-5">
+          <img src="/logo.svg" alt="Logotipo DevTree" />
+        </div>
+
+        <div className="py-10">
+          <Outlet />
+        </div>
+      </div>
+
+      <Toaster />
+    </>
+  );
+}
+
+
+creamos un login action y seteamos localstorage con auth_token name y email
+
+creamos un segundo layout llamado applayout en rutas tambien lo tuve que declarar y defini un path en el layout
+
+en la ruta hija pongo index true y hereda la ruta del padre en este caso el applayout 
+
+en este caso las rutas son distitasn 
+
+se dejan asi 
+
+para poder ir a /admin/profile 
+
+
+     <Route path="/admin" element={<AppLayout />}>
+          <Route index={true} element={<LinkTreeView />} />
+          <Route path="profile" element={<RegisterView />} />
+        </Route>
+
+instalamos heroicons
+
+npm i @heroicons/react
+
+
+TODO: REACT QUERY
+tan stack query 
+
+npm i @tanstack
+/react-query
+
+https://tanstack.com/query/latest
+
+se habilita globalmente en el main.TSX
+
+
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import Router from "./router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient();
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <Router />
+
+      <ReactQueryDevtools />
+    </QueryClientProvider>
+  </StrictMode>
+);
+
+
+los get son siempre useQuery todo los demas sson mutaciones 
+
+  const { data, isLoading, error, isError } = useQuery({
+    queryFn: getUser,
+    queryKey: ["user"],
+    retry: 1,
+    refetchOnWindowFocus: false,
+  });
+
+  console.log("data desde componente applayout", data);
+
+  console.log("isLoading", isLoading);
+  console.log("isError", isError);
+  console.log("error", error?.message);
+
+  npm install @headlessui/react
+
+
+
+LOGICA IMPORTANTE EN DEVTREELINKS 
+
+
+PARA DRAG AND DROP  
+npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
+
+
+ npm i react-slugify
+
+
