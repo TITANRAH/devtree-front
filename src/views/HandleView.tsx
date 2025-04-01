@@ -19,9 +19,11 @@ function HandleView() {
   console.log(data);
 
   if (isLoading) return "Cargando...";
+
+  
   if (error) return <Navigate to={"/404"} />;
 
-  if (data) return <HandleData data={data}/>;
+  if (data && !error) return <HandleData data={data}/>;
 }
 
 export default HandleView;
