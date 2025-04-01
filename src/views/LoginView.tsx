@@ -56,25 +56,25 @@ function LoginView() {
 
   return (
     <>
-      <h1 className="text-4xl  text-white font-bold">Iniciar Sesión</h1>
+      <h1 className="text-4xl font-bold text-white">Iniciar Sesión</h1>
       {/* TODO: LINK */}
 
       {/* SI QUISIERA SALIR DE LA APP USO A PERO DENTRO USO LINK */}
 
       <form
         onSubmit={handleSubmit(handleLogin)}
-        className="bg-white px-5 py-20 rounded-lg space-y-10 mt-10"
+        className="px-5 py-20 mt-10 space-y-10 bg-white rounded-lg"
         noValidate
       >
         <div className="grid grid-cols-1 space-y-3">
           <label htmlFor="email" className="text-2xl text-slate-500">
-            E-mail
+            E-mail test
           </label>
           <input
             id="email"
             type="email"
             placeholder="Email de Registro"
-            className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
+            className="p-3 border-none rounded-lg bg-slate-100 placeholder-slate-400"
             {...register("email", {
               required: "El Email es obligatorio",
               pattern: {
@@ -93,7 +93,7 @@ function LoginView() {
             id="password"
             type="password"
             placeholder="Password de Registro"
-            className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
+            className="p-3 border-none rounded-lg bg-slate-100 placeholder-slate-400"
             {...register("password", {
               required: "El Password es obligatorio",
             })}
@@ -105,14 +105,14 @@ function LoginView() {
 
         <input
           type="submit"
-          className="bg-cyan-400 p-3 text-lg w-full uppercase text-slate-600 rounded-lg font-bold cursor-pointer"
+          className="w-full p-3 text-lg font-bold uppercase rounded-lg cursor-pointer bg-cyan-400 text-slate-600"
           value="Iniciar Sesión"
         />
       </form>
 
       <nav className="mt-10">
         <Link
-          className="text-white text-center mt-10 text-lg block"
+          className="block mt-10 text-lg text-center text-white"
           to="/auth/register"
         >
           ¿No tienes una cuenta? Crea una aquí
