@@ -68,7 +68,7 @@ function LoginView() {
       >
         <div className="grid grid-cols-1 space-y-3">
           <label htmlFor="email" className="text-2xl text-slate-500">
-            E-mail test
+            E-mail
           </label>
           <input
             id="email"
